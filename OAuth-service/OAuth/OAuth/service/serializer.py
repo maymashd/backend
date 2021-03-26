@@ -9,6 +9,22 @@ class UserShortSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MyUser
-        fields = ('id', 'username', 'first_name', 'last_name',  'password','address','birth_date')
+        fields = ('id', 'username', 'first_name', 'last_name',  'password','address',)
+
+    def create(self, validated_data):
+        user = MyUser.objects.create_user(username=validated_data['username'],
+                                          address=validated_data.get('address', ''),)
+        print(validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
 
 
+class UserListSerializer(serializers.ModelSerializer):
+    id=serializers.IntegerField(read_only=True)
+    username=serializers.CharField(read_only=True)
+
+
+    class Meta:
+        model=MyUser
+        fields=('id','username',)

@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', obtain_jwt_token),
     path('', include('OAuth.service.urls')),
+    #path('oauth/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 
 ]

@@ -10,6 +10,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -37,9 +39,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_jwt',
     'OAuth.service',
-    'oauth2_provider',
-    'social_django',
-    'rest_framework_social_oauth2'
+#   'oauth2_provider',
+
 ]
 
 MIDDLEWARE = [
@@ -51,17 +52,17 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-SOCIAL_AUTH_VK_OAUTH2_KEY = '7795209'
-SOCIAL_AUTH_VK_OAUTH2_SECRET='gaJOYKaNhrzUQ9zeEbto'
-AUTHENTICATION_BACKEND=(
-    'social_core.backends.vk.VKOAuth2',
-    'rest_framework_social_oauth2.backends.DjangoOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-)
+
+
 
 AUTH_USER_MODEL = 'service.MyUser'
 
 ROOT_URLCONF = 'OAuth.urls'
+
+#ID = '1FSaRVGrOqd7keGu1Cjw0L6TlMNTT2aQb14SrNIb'
+#SECRET = 'aIsd07SPkUGB8o7SyquOHrwZYyETVKGjFLkSPeIjM2KvxAHT7bWY2NheedusdtTikSbQs4bQmBOTcxZLrcLJhcclgVH5i8Sjwi3RpK81siQvqMXzlUrHCF21zc9FxJ7x'
+
+
 
 TEMPLATES = [
     {
@@ -138,8 +139,7 @@ REST_FRAMEWORK = {
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
-        'rest_framework_social_oauth2.authentication.SocialAuthentication',
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+       # 'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
     ),
 }
 import datetime
