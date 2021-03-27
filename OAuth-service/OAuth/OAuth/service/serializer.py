@@ -9,11 +9,11 @@ class UserShortSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MyUser
-        fields = ('id', 'username', 'first_name', 'last_name',  'password','address',)
+        fields = ('id', 'username', 'first_name', 'last_name', 'password',)
 
     def create(self, validated_data):
         user = MyUser.objects.create_user(username=validated_data['username'],
-                                          address=validated_data.get('address', ''),)
+                                          )
         print(validated_data)
         user.set_password(validated_data['password'])
         user.save()

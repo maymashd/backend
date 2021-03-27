@@ -1,4 +1,5 @@
 from rest_framework import generics
+from rest_framework.decorators import api_view
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import AllowAny
 
@@ -23,6 +24,27 @@ class UserCreateView(generics.CreateAPIView):
     def get_serializer_class(self):
         return UserShortSerializer
 
+class Validation(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        return MyUser.objects.all()
+    def get_serializer_class(self):
+        return UserShortSerializer
+
+    def get(self, request, *args, **kwargs):
+        if request.user!='':
+            return Response(request.user.id)
+
+
+class is_valid_jwt(mixins.ListModelMixin,
+            generics.GenericAPIView):
+    queryset = MyUser.objects.all()
+    serializer_class = UserShortSerializer
+
+
+
+
 
 def validateUser(token):
     try:
@@ -33,6 +55,7 @@ def validateUser(token):
         return user.id
     except ValidationError as v:
         return "validation error"
+
 
 
 class UserListView(mixins.ListModelMixin,
@@ -93,3 +116,4 @@ class UserListView(mixins.ListModelMixin,
             return Response(serializer.data)
         else:
             return HttpResponseForbidden()
+
